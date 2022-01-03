@@ -10,5 +10,7 @@ jobs:
       - run: echo "Hello World"
       
       - name: Moving build to artifacts directory
-        run: ./install.sh
+        run: |
+          chmod +rx install.sh
+          ./install.sh
 

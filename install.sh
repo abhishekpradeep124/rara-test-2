@@ -1,19 +1,15 @@
 #! /usr/bin/env bash
 
-set -e
+ENV HELM_S3_PLUGIN_VERSION "0.10.0"
 
 sudo apt install awscli -y
 
-
-HELM_S3_PLUGIN_VERSION="0.10.0"
-AWS_DEFAULT_REGION="ap-southeast-1"
-# install kubectl
-curl -L "https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /usr/local/bin/kubectl
-chmod +x /usr/local/bin/kubectl
-kubectl version --client
-
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl.sha256openssl sha1 -sha256 kubectl
+chmod +x ./kubectl
 sudo cp ./kubectl /usr/local/bin/kubectl 
 kubectl version --short --client
+
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 eksctl version
@@ -26,9 +22,3 @@ mv linux-amd64/helm /usr/local/bin/helm
 
 # install S3 plugin for Helm
 helm plugin install https://github.com/hypnoglow/helm-s3.git --version $HELM_S3_PLUGIN_VERSION
-
-# cleanup
-rm /var/cache/apk/*
-rm -rf /tmp/*
-
-

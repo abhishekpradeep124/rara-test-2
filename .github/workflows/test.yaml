@@ -2,6 +2,19 @@ name: GitHub Actions Demo
 on: [push]
 jobs:
   hello:
-    runs-on: ghcr.io/abhishekpradeep124/rara-helm-test:latest
+    runs-on: ubuntu:latest
     steps:
+      - name: 'Checkout'  # Checkout the repository code.
+        uses: 'actions/checkout@v1'
+        
       - run: echo "Hello World"
+      
+      - name: deploy postgres to cluster
+        uses: wahyd4/kubectl-helm-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: |
+            helm repo add bitnami https://charts.bitnami.com/bitnami
+            helm upgrade --install postgres -n data bitnami/postgresql
+

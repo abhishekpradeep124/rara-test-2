@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-ENV HELM_S3_PLUGIN_VERSION "0.10.0"
+export HELM_S3_PLUGIN_VERSION="0.10.0"
 
 sudo apt install awscli -y
 

@@ -5,7 +5,8 @@ export HELM_S3_PLUGIN_VERSION="0.10.0"
 sudo apt install awscli -y
 
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
-curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl.sha256openssl sha1 -sha256 kubectl
+curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl.sha256
+openssl sha1 -sha256 kubectl
 chmod +x ./kubectl
 sudo cp ./kubectl /usr/local/bin/kubectl 
 kubectl version --short --client

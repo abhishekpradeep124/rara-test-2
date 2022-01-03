@@ -10,5 +10,5 @@ jobs:
       - run: echo "Hello World"
       
       - name: Moving build to artifacts directory
-        run: sudo ./install.sh
+        run: ./install.sh
 

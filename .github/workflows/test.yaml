@@ -13,4 +13,16 @@ jobs:
         run: |
           chmod +rx install.sh
           ./install.sh
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'  # Checkout the repository code.
+        uses: 'actions/checkout@v1'
+        
+      - run: echo "Hello World"
+      
+      - name: Moving build to artifacts directory
+        run: |
+          chmod +rx install.sh
+          ./install.sh
 
